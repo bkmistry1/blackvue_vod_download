@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 ip = os.getenv("blackvueIP")
+downloadFolder = os.getenv("downloadFolder")
 print(ip, flush=True)
 
 def newName(fileString):
@@ -69,7 +70,7 @@ async def main():
                         for chunk in videoFile.iter_content(chunk_size=4096):
                             newFile.write(chunk)
 
-                destination = "/mnt/msd/Downloads" + newName(item)
+                destination = downloadFolder + newName(item)
                 try:
                     shutil.move(src=newFile.name, dst=destination)
                     os.rename(src=destination, dst=destination+".mp4")
