@@ -12,6 +12,7 @@ print(ip, flush=True)
 
 def newName(fileString):
     newName = fileString.replace("/Record/", "/")
+    newName = newName.replace(".mp4", "")
     return newName
 
 
@@ -68,7 +69,12 @@ async def main():
                         for chunk in videoFile.iter_content(chunk_size=4096):
                             newFile.write(chunk)
 
-                shutil.move(src=newFile.name, dst="/mnt/msd/Downloads"+newName(item))
+                destination = "/mnt/msd/Downloads" + newName(item)
+                try:
+                    shutil.move(src=newFile.name, dst=destination)
+                    os.rename(src=destination, dst=destination+".mp4")
+                except Exception as e: 
+                    print(e, flush=True)
 
             except Exception as e:
                 print(e, flush=True)
