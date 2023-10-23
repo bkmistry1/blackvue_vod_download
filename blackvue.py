@@ -61,7 +61,7 @@ async def getFileList():
 async def writeToLog(fileName):
     print("fileName: " + fileName)
     with open("log.txt", "a") as f:
-        f.write(fileName + "\n")
+        f.write(fileName + ".mp4\n")
     return
 
 
