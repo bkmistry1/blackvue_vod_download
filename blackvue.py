@@ -68,6 +68,7 @@ async def ignoreAlreadyDownloaded(fileList: list):
     with open("log.txt", "r") as r:
         for line in r.readlines():
             blackvueFileName = "/Record/" + line
+            blackvueFileName = blackvueFileName.replace("\n", "")
             print(blackvueFileName, flush=True)
             print(blackvueFileName in fileList)
             if blackvueFileName in fileList:
