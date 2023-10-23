@@ -54,7 +54,8 @@ async def getFileList():
 
     print(newList, flush=True)
     newList = newList.sort()
-    
+    print(newList, flush=True)
+        
     return newList
 
 async def main():
