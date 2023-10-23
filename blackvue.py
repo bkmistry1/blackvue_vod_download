@@ -69,10 +69,7 @@ async def ignoreAlreadyDownloaded(fileList: list):
         for line in r.readlines():
             blackvueFileName = "/Record/" + line
             blackvueFileName = blackvueFileName.replace("\n", "")
-            print(blackvueFileName, flush=True)
-            print(blackvueFileName in fileList)
             if blackvueFileName in fileList:
-                print("found", flush=True)
                 fileList.remove(blackvueFileName)
 
     return fileList
