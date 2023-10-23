@@ -52,9 +52,9 @@ async def getFileList():
         newItem = newItem.replace("n:", "")   
         newList.append(newItem)
 
-    # print(newList, flush=True)
+    print(newList, flush=True)
     newList.sort()
-    # print(newList, flush=True)
+    print(newList, flush=True)
 
     return newList
 
