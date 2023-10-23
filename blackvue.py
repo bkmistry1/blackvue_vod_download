@@ -11,7 +11,7 @@ ip = os.getenv("blackvueIP")
 downloadFolder = os.getenv("downloadFolder")
 print(ip, flush=True)
 
-async def newName(fileString):
+async def newName(fileString: str):
     newName = fileString.replace("/Record/", "")
     newName = newName.replace(".mp4", "")
     return newName
@@ -58,8 +58,8 @@ async def getFileList():
 
     return newList
 
-async def writeToLog(file: str):
-    fileName = file.replace("/Record/")
+async def writeToLog(fileName):
+    print("fileName: " + fileName)
     with open("log.txt", "a") as f:
         f.write(fileName + "\n")
     return
