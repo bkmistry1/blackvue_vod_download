@@ -26,7 +26,7 @@ async def getFileList():
     while(response == None or response.status_code != 200):
         print("checking", flush=True)
         try:
-            response = requests.get(url=url, timeout=5)
+            response = requests.get(url=url, timeout=10)
         except Exception as e:
             print(e, flush=True)
         print("sleeping", flush=True)
