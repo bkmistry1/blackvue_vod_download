@@ -52,9 +52,9 @@ async def getFileList():
         newItem = newItem.replace("n:", "")   
         newList.append(newItem)
 
-    print(newList, flush=True)
     newList.sort()
-    print(newList, flush=True)
+    newList = await ignoreAlreadyDownloaded(newList)
+    print(newList)
 
     return newList
 
@@ -64,6 +64,13 @@ async def writeToLog(fileName):
         f.write(fileName + ".mp4\n")
     return
 
+async def ignoreAlreadyDownloaded(fileList: list):
+    with open("log.txt", "r") as r:
+        for line in r.readlines():
+            blackvueFileName = "/Record/" + line
+            fileList.remove(blackvueFileName)
+
+    return fileList
 
 async def main():
     while(1):
