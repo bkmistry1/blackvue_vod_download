@@ -12,7 +12,7 @@ downloadFolder = os.getenv("downloadFolder")
 print(ip, flush=True)
 
 def newName(fileString):
-    newName = fileString.replace("/Record/", "/")
+    newName = fileString.replace("/Record/", "")
     newName = newName.replace(".mp4", "")
     return newName
 
@@ -58,13 +58,21 @@ async def getFileList():
 
     return newList
 
+async def writeToLog(file: str):
+    fileName = file.replace("/Record/")
+    with open("log.txt", "a") as f:
+        f.write(fileName + "\n")
+    return
+
+
 async def main():
     while(1):
         fileList = await getFileList()
 
         for item in fileList:
             url = ip + str(item)
-            filePath = "/tmp" + newName(item)
+            newName = newName(item)
+            filePath = "/tmp/" + newName
             print(filePath, flush=True)
             try:
                 with requests.get(url=url, stream=True) as videoFile:
@@ -78,6 +86,7 @@ async def main():
                 try:
                     shutil.move(src=newFile.name, dst=destination)
                     os.rename(src=destination, dst=destination+".mp4")
+                    await writeToLog(newName)
                 except Exception as e: 
                     print(e, flush=True)
 
