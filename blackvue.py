@@ -70,7 +70,7 @@ async def ignoreAlreadyDownloaded(fileList: list):
             blackvueFileName = "/Record/" + line
             print(blackvueFileName)
             if blackvueFileName in fileList:
-                print("found")
+                print("found", flush=True)
                 fileList.remove(blackvueFileName)
 
     return fileList
