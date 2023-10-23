@@ -31,7 +31,7 @@ async def getFileList():
             print(e, flush=True)
         print("sleeping", flush=True)
         await asyncio.sleep(10)
-    print(response.text, flush=True)
+    # print(response.text, flush=True)
     responseText = response.text
 
     responseText = responseText.replace("v:1.00\r\n", "")
@@ -52,6 +52,7 @@ async def getFileList():
         newItem = newItem.replace("n:", "")   
         newList.append(newItem)
 
+    print(newList, flush=True)
     newList = newList.sort()
     
     return newList
