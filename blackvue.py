@@ -53,7 +53,7 @@ async def getFileList():
         newList.append(newItem)
 
     # print(newList, flush=True)
-    # newList.sort()
+    newList.sort()
     # print(newList, flush=True)
 
     return newList
