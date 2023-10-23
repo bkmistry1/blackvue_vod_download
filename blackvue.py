@@ -89,7 +89,7 @@ async def main():
                         for chunk in videoFile.iter_content(chunk_size=4096):
                             newFile.write(chunk)
 
-                destination = downloadFolder + newFileName
+                destination = downloadFolder + "/" + newFileName
                 try:
                     shutil.move(src=newFile.name, dst=destination)
                     os.rename(src=destination, dst=destination+".mp4")
