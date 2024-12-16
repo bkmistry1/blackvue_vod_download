@@ -9,6 +9,7 @@ load_dotenv()
 
 ip = os.getenv("blackvueIP")
 downloadFolder = os.getenv("downloadFolder")
+tmpFolder= os.getenv("tmpFolder")
 print(ip, flush=True)
 
 async def newName(fileString: str):
@@ -31,7 +32,6 @@ async def getFileList():
             print(e, flush=True)
         print("sleeping", flush=True)
         await asyncio.sleep(10)
-    # print(response.text, flush=True)
     responseText = response.text
 
     responseText = responseText.replace("v:1.00\r\n", "")
@@ -81,7 +81,7 @@ async def main():
         for item in fileList:
             url = ip + str(item)
             newFileName = await newName(item)
-            filePath = "/tmp/" + newFileName
+            filePath = tmpFolder + newFileName
             print(filePath, flush=True)
             try:
                 with requests.get(url=url, stream=True) as videoFile:
