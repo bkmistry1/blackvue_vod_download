@@ -2,6 +2,7 @@ import os
 import requests
 import shutil
 import asyncio
+import subprocess
 
 from dotenv import load_dotenv
 
@@ -17,6 +18,17 @@ async def newName(fileString: str):
     newName = newName.replace(".mp4", "")
     return newName
 
+async def checkAvailableSpace(path):
+    # Run df command and process output
+    result = subprocess.run(["df", path], capture_output=True, text=True)
+    lines = result.stdout.split("\n")
+    data = lines[1].split()
+
+    # Calculate percentage available
+    used_percentage = int(data[4].replace("%", ""))
+    available_percentage = 100 - used_percentage
+
+    return available_percentage
 
 async def getFileList():
     fileList = []
@@ -76,6 +88,7 @@ async def ignoreAlreadyDownloaded(fileList: list):
 
 async def main():
     while(1):
+
         fileList = await getFileList()
 
         for item in fileList:
@@ -92,6 +105,12 @@ async def main():
                             newFile.write(chunk)
 
                 destination = downloadFolder + "/" + newFileName
+
+                availableSpace = await checkAvailableSpace(downloadFolder=downloadFolder)
+                while(availableSpace < 10):
+                    await asyncio.sleep(5)
+                    availableSpace = await checkAvailableSpace(downloadFolder=downloadFolder)                
+
                 try:
                     shutil.move(src=newFile.name, dst=destination)
                     os.rename(src=destination, dst=destination+".mp4")
