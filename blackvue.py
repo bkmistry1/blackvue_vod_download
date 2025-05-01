@@ -106,7 +106,7 @@ async def main():
 
                 destination = downloadFolder + "/" + newFileName
 
-                availableSpace = await checkAvailableSpace(downloadFolder=downloadFolder)
+                availableSpace = await checkAvailableSpace(path=downloadFolder)
                 print("working")
                 while(availableSpace < 10):
                     print(availableSpace)
