@@ -157,10 +157,13 @@ async def downloadFilesToTmpFolder():
             print(e, flush=True)
 
 async def main():
+
+    asyncio.gather(downloadFilesToTmpFolder())
+    asyncio.gather(moveFileFromTmpToDestinationFolder())    
     while(1):
 
-        asyncio.gather(downloadFilesToTmpFolder())
-        asyncio.gather(moveFileFromTmpToDestinationFolder())
+        print("running")
+        await asyncio.sleep(5)
 
         # fileList = await getFileList()
 
