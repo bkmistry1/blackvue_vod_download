@@ -157,8 +157,9 @@ async def downloadFilesToTmpFolder():
 
 async def main():
 
-    asyncio.gather(downloadFilesToTmpFolder())
-    asyncio.gather(moveFileFromTmpToDestinationFolder())    
+    task = asyncio.create_task(downloadFilesToTmpFolder())
+    task1 = asyncio.create_task(moveFileFromTmpToDestinationFolder())
+
     while(1):
 
         print("running")
