@@ -3,6 +3,7 @@ import requests
 import shutil
 import asyncio
 import subprocess
+import aiohttp
 
 from dotenv import load_dotenv
 
@@ -116,6 +117,7 @@ async def moveFileFromTmpToDestinationFolder():
             shutil.move(src=source, dst=destination)
             os.rename(src=destination, dst=destination+".mp4")
             await writeToLog(fileName)
+            videoFileTransferList.remove(videoFile)
 
         except Exception as e:
             print(e, flush=True)
@@ -142,14 +144,14 @@ async def downloadFilesToTmpFolder():
         print(filePath, flush=True)
         
         try:
-            with requests.get(url=url, stream=True) as videoFile:
-                videoFile.raise_for_status()
-                
-                with open(filePath, "wb") as newFile:
-                    for chunk in videoFile.iter_content(chunk_size=4096):
-                        newFile.write(chunk)   
 
-            videoFile = videoFileClass(fileName=newFileName, source=tmpFolder, destination=destination)
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url=url) as response:
+                    with open(filePath, "wb") as newFile:
+                        async for chunk in response.content.iter_chunked(4096):
+                            newFile.write(chunk)                    
+
+            videoFile = videoFileClass(fileName=newFileName, source=filePath, destination=destination)
             videoFileTransferList.append(videoFile)                             
 
         except Exception as e:
