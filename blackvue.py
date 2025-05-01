@@ -139,8 +139,7 @@ async def downloadFilesToTmpFolder():
         filePath = tmpFolder + newFileName
         destination = downloadFolder + "/" + newFileName
         
-        # print(filePath, flush=True)
-        
+        print(filePath, flush=True)
         
         try:
             with requests.get(url=url, stream=True) as videoFile:
@@ -163,39 +162,6 @@ async def main():
     while(1):
 
         print("running")
-        await asyncio.sleep(5)
-
-        # fileList = await getFileList()
-
-        # for item in fileList:
-        #     url = ip + str(item)
-        #     newFileName = await newName(item)
-        #     filePath = tmpFolder + newFileName
-        #     print(filePath, flush=True)
-        #     try:
-        #         with requests.get(url=url, stream=True) as videoFile:
-        #             videoFile.raise_for_status()
-                    
-        #             with open(filePath, "wb") as newFile:
-        #                 for chunk in videoFile.iter_content(chunk_size=4096):
-        #                     newFile.write(chunk)
-
-        #         destination = downloadFolder + "/" + newFileName
-
-                # availableSpace = await checkAvailableSpace(path=downloadFolder)
-                # while(availableSpace < 10):
-                #     print(str(availableSpace) + r"% available")
-                #     await asyncio.sleep(5)
-                #     availableSpace = await checkAvailableSpace(path=downloadFolder)                
-
-                # try:
-                #     shutil.move(src=newFile.name, dst=destination)
-                #     os.rename(src=destination, dst=destination+".mp4")
-                #     await writeToLog(newFileName)
-                # except Exception as e: 
-                #     print(e, flush=True)
-
-            # except Exception as e:
-            #     print(e, flush=True)
+        await asyncio.sleep(11)
 
 asyncio.run(main())
