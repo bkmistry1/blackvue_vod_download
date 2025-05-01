@@ -111,7 +111,7 @@ async def main():
                 while(availableSpace < 10):
                     print(availableSpace)
                     await asyncio.sleep(5)
-                    availableSpace = await checkAvailableSpace(downloadFolder=downloadFolder)                
+                    availableSpace = await checkAvailableSpace(path=downloadFolder)                
 
                 try:
                     shutil.move(src=newFile.name, dst=destination)
