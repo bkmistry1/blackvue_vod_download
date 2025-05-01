@@ -106,10 +106,9 @@ async def main():
 
                 destination = downloadFolder + "/" + newFileName
 
-                availableSpace = await checkAvailableSpace(path=downloadFolder)
-                print("working")
+                availableSpace = 0
                 while(availableSpace < 10):
-                    print(availableSpace)
+                    print(availableSpace + r"% available")
                     await asyncio.sleep(5)
                     availableSpace = await checkAvailableSpace(path=downloadFolder)                
 
