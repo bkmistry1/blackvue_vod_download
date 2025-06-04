@@ -155,6 +155,7 @@ async def downloadFilesToTmpFolder():
             videoFileTransferList.append(videoFile)                             
 
         except Exception as e:
+            os.remove(filePath)
             print(e, flush=True)
 
 async def main():
