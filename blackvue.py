@@ -76,7 +76,7 @@ async def getFileList():
 
     newList.sort()
     newList = await ignoreAlreadyDownloaded(newList)
-    print(newList)
+    # print(newList)
 
     return newList
 
