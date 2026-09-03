@@ -103,7 +103,7 @@ async def moveFileFromTmpToDestinationFolder():
             print("waiting for file to be downloaded")
 
         availableSpace = await checkAvailableSpace(path=downloadFolder)
-        while(availableSpace < 10):
+        while(availableSpace < 15):
             print(str(availableSpace) + r"% available")
             await asyncio.sleep(5)
             availableSpace = await checkAvailableSpace(path=downloadFolder)  
